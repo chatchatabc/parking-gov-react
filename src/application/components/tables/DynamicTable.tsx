@@ -1,0 +1,60 @@
+import React from "react";
+import {
+  AxiosResponseData,
+  AxiosResponseError,
+} from "../../../domain/models/AxiosModel";
+import {
+  CommonPagination,
+  CommonVariables,
+} from "../../../domain/models/CommonModel";
+import { Table, TableProps, message } from "antd";
+
+type Props = TableProps<any> & {
+  getData: (
+    variables: CommonVariables
+  ) => Promise<AxiosResponseData<CommonPagination> | AxiosResponseError>;
+};
+
+function DynamicTable({ getData, ...props }: Props) {
+  const [data, setData] = React.useState<any>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [pagination, setPagination] = React.useState({
+    current: 1,
+    pageSize: 10,
+    total: 0,
+  });
+
+  React.useEffect(() => {
+    if (loading) {
+      (async () => {
+        const response = await getData({
+          page: pagination.current - 1,
+          size: pagination.pageSize ?? 10,
+        });
+
+        if (response.errors) {
+          message.error("Failed to fetch data");
+        } else {
+          setData(response.data.content);
+          setPagination({
+            ...pagination,
+            total: response.data.totalElements,
+          });
+        }
+
+        setLoading(false);
+      })();
+    }
+  }, [loading]);
+
+  return (
+    <Table
+      className="w-full"
+      dataSource={data}
+      pagination={{ ...pagination, showSizeChanger: true }}
+      {...props}
+    />
+  );
+}
+
+export default DynamicTable;
