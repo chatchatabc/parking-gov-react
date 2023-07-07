@@ -1,11 +1,12 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import {
   utilGetSidebarStatus,
   utilSaveSidebarStatus,
 } from "../../domain/services/utilService";
 import Sidebar from "../components/SideBar";
 import Navbar from "../components/Navbar";
+import { authGetToken } from "../../domain/services/authService";
 
 function MainLayout() {
   const [openSidebar, setOpenSidebar] = React.useState(utilGetSidebarStatus());
@@ -13,6 +14,10 @@ function MainLayout() {
   React.useEffect(() => {
     utilSaveSidebarStatus(openSidebar);
   }, [openSidebar]);
+
+  if (!authGetToken()) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>

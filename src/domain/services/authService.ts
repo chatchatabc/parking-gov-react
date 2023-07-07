@@ -15,5 +15,10 @@ export async function authLogin(values: Record<string, any>) {
 export async function authLogout() {}
 
 export function authGetToken() {
-  return "authGetToken";
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
+
+  return token;
 }
