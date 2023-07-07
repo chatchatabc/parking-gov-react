@@ -4,10 +4,29 @@ import { User } from "../models/UserModel";
 
 export async function authLogin(values: Record<string, any>) {
   const response: AxiosResponse<User> = await restPost(
-    "/auth/login",
+    "/auth/login-password",
     values,
     "AuthLogin"
   );
+
+  if (response.data.errors) {
+    return response.data;
+  }
+  const token = response.headers["x-access-token"];
+
+  if (!token) {
+    return {
+      errors: [
+        {
+          message: "Token not found",
+          title: "AuthLogin",
+        },
+      ],
+    };
+  }
+
+  document.cookie = `token=${token}; path=/; max-age=86400`;
+  sessionStorage.setItem("user", JSON.stringify(response.data));
 
   return response.data;
 }
