@@ -31,7 +31,16 @@ export async function authLogin(values: Record<string, any>) {
   return response.data;
 }
 
-export async function authLogout() {}
+export async function authLogout() {
+  const response = await restPost("/profile/logout", {}, "AuthLogout");
+
+  if (!response.data.errors) {
+    document.cookie = "token=; path=/; max-age=0";
+    sessionStorage.removeItem("user");
+  }
+
+  return response.data;
+}
 
 export function authGetToken() {
   const token = document.cookie
