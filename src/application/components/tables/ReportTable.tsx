@@ -50,7 +50,9 @@ function ReportTable() {
       key: "status",
       render: (record: Report) => {
         const statusOptions = reportOptionsStatus();
-        const { label, value } = statusOptions[record.status];
+        const { label, value } = statusOptions.find(
+          (item) => item.value === record.status
+        )!;
         let className = "";
         switch (value) {
           case 1:
