@@ -19,6 +19,20 @@ export async function reportGet(params: { id: string }) {
   return response.data;
 }
 
+export async function reportGetAllStatus(
+  params: CommonVariables & { id: number }
+) {
+  const { id, ...rest } = params;
+
+  const response = await restGet(
+    `/report/status/${id}`,
+    rest,
+    "ReportGetAllStatus"
+  );
+
+  return response.data;
+}
+
 export function reportOptionsStatus() {
   return [
     {

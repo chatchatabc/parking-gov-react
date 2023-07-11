@@ -10,3 +10,11 @@ export type Report = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type ReportStatus = {
+  remarks: string;
+  createdAt: string;
+
+  id: number;
+  status: number;
+};
