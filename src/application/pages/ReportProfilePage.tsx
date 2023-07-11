@@ -4,7 +4,7 @@ import { Button, Spin } from "antd";
 import { Report } from "../../domain/models/ReportModel";
 import MapBoxComp from "../components/MapBoxComp";
 import ReportStatusTable from "../components/tables/ReportStatusTable";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { drawerUpdate } from "../redux/features/drawerSlice";
 import { useParams } from "react-router-dom";
 import { Marker } from "react-map-gl";
@@ -14,10 +14,12 @@ function ReportProfilePage() {
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
+  const global = useAppSelector((state) => state.global);
 
   const { data, loading } = useGetData<Report>({
     getData: reportGet,
     params: { id },
+    reset: global.reset,
   });
 
   if (loading) {
@@ -112,6 +114,7 @@ function ReportProfilePage() {
                     title: "Add Report Status",
                     data: {
                       reportId: data.id,
+                      status: data.status,
                     },
                     buttonText: "Add",
                     content: "reportStatus",

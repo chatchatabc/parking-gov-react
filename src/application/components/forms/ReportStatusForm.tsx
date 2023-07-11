@@ -27,7 +27,6 @@ function ReportStatusForm({ handleSubmit, loading, form }: CommonHandleSubmit) {
           className="w-full p-1"
           name="status"
           label="Status"
-          initialValue={0}
           rules={[
             {
               required: true,

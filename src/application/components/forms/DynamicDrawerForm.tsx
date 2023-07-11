@@ -43,6 +43,7 @@ function DynamicDrawerForm() {
   }
 
   React.useEffect(() => {
+    form.resetFields();
     form.setFieldsValue(drawer.data);
   }, [drawer.data]);
 
