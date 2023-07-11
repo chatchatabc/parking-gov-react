@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import drawerReducer from "./features/drawerSlice";
+import globalReducer from "./features/globalSlice";
 // ...
 
 const store = configureStore({
   reducer: {
     drawer: drawerReducer,
+    global: globalReducer,
   },
 });
 
