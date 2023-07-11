@@ -36,7 +36,7 @@ function Sidebar({ openSidebar }: Props) {
       <ul className="p-1 text-gray-600">
         {items.map((item) => {
           return (
-            <li className="p-1">
+            <li key={item.path} className="p-1">
               <button
                 onClick={() => {
                   navigate(item.path);
