@@ -27,14 +27,14 @@ function DynamicDrawerForm() {
       message.error(errorMessage);
     } else {
       message.success(successMessage);
+      dispatch(
+        drawerUpdate({
+          show: false,
+        })
+      );
     }
 
     setLoading(false);
-    dispatch(
-      drawerUpdate({
-        show: false,
-      })
-    );
 
     return response;
   }
