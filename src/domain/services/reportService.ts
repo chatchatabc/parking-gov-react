@@ -1,4 +1,4 @@
-import { restGet } from "../infra/apis/restActions";
+import { restGet, restPost } from "../infra/apis/restActions";
 import { AxiosResponse } from "../models/AxiosModel";
 import { CommonPagination, CommonVariables } from "../models/CommonModel";
 import { Report } from "../models/ReportModel";
@@ -15,6 +15,15 @@ export async function reportGetAll(params: CommonVariables) {
 
 export async function reportGet(params: { id: string }) {
   const response = await restGet(`/report/${params.id}`, {}, "ReportGet");
+
+  return response.data;
+}
+
+export async function reportCreate(values: Record<string, any>) {
+  const { name, description, plateNumber, latitude, longitude } = values;
+  const data = { name, description, plateNumber, latitude, longitude };
+
+  const response = await restPost("/report", data, "ReportCreate");
 
   return response.data;
 }
