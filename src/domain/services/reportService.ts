@@ -13,6 +13,12 @@ export async function reportGetAll(params: CommonVariables) {
   return response.data;
 }
 
+export async function reportGet(params: { id: string }) {
+  const response = await restGet(`/report/${params.id}`, {}, "ReportGet");
+
+  return response.data;
+}
+
 export function reportOptionsStatus() {
   return [
     {
