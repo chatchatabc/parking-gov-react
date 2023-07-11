@@ -1,7 +1,12 @@
 import { Modal, Popover, message } from "antd";
 import React from "react";
-import { authLogout } from "../../domain/services/authService";
+import {
+  authGetId,
+  authGetUsername,
+  authLogout,
+} from "../../domain/services/authService";
 import { useNavigate } from "react-router-dom";
+import ImageComp from "./ImageComp";
 
 type Props = {
   openSidebar: boolean;
@@ -83,8 +88,10 @@ function Navbar({ openSidebar, setOpenSidebar }: Props) {
             popoverVisible ? "bg-p100" : ""
           } duration-300 hover:bg-p100`}
         >
-          <p>User</p>
-          <div className="w-10 h-10 rounded-full border border-gray-400"></div>
+          <p className="capitalize">{authGetUsername()}</p>
+          <div className="w-10 h-10 rounded-full border border-gray-400 overflow-hidden">
+            <ImageComp src={`/api/user/avatar/${authGetId()}`} />
+          </div>
         </div>
       </Popover>
     </header>
