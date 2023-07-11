@@ -48,7 +48,7 @@ export async function reportGetAllStatus(
 
   const response = await restGet(
     `/report/status/${id}`,
-    rest,
+    { ...rest, sort: "createdAt,desc" },
     "ReportGetAllStatus"
   );
 
