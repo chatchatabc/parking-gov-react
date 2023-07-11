@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ReportProfilePage from "./pages/ReportProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,15 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "reports",
+        children: [
+          {
+            path: ":id",
+            element: <ReportProfilePage />,
+          },
+        ],
       },
       {
         path: "*",
