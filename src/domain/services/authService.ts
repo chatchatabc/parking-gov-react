@@ -52,6 +52,16 @@ export function authGetUser() {
   return JSON.parse(user) as User;
 }
 
+export function authGetUsername() {
+  const user = authGetUser();
+
+  if (!user) {
+    return null;
+  }
+
+  return user.username;
+}
+
 export function authGetId() {
   const user = authGetUser();
 
