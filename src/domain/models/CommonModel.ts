@@ -1,3 +1,5 @@
+import { AxiosResponseData, AxiosResponseError } from "./AxiosModel";
+
 export type CommonVariables = {
   page: number;
   size: number;
@@ -33,4 +35,18 @@ export type CommonPagination<Data = any> = {
   first: boolean;
   last: boolean;
   empty: boolean;
+};
+
+export type CommonSendData = (
+  data: Record<string, any>
+) => Promise<AxiosResponseData | AxiosResponseError>;
+
+export type CommonHandleSubmit<Data = any> = {
+  loading: boolean;
+  handleSubmit: (
+    data: Record<string, any>,
+    sendData: CommonSendData,
+    successMessage: string,
+    errorMessage: string
+  ) => Promise<AxiosResponseData<Data> | AxiosResponseError>;
 };
