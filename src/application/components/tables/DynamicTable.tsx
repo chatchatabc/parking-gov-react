@@ -8,6 +8,7 @@ import {
   CommonVariables,
 } from "../../../domain/models/CommonModel";
 import { Table, TableProps, message } from "antd";
+import { useAppSelector } from "../../redux/hooks";
 
 type Props = TableProps<any> & {
   getData: (
@@ -16,6 +17,8 @@ type Props = TableProps<any> & {
 };
 
 function DynamicTable({ getData, ...props }: Props) {
+  const global = useAppSelector((state) => state.global);
+
   const [data, setData] = React.useState<any>([]);
   const [loading, setLoading] = React.useState(true);
   const [pagination, setPagination] = React.useState({
@@ -23,6 +26,10 @@ function DynamicTable({ getData, ...props }: Props) {
     pageSize: 10,
     total: 0,
   });
+
+  React.useEffect(() => {
+    setLoading(true);
+  }, [global.reset]);
 
   React.useEffect(() => {
     if (loading) {
@@ -49,6 +56,7 @@ function DynamicTable({ getData, ...props }: Props) {
 
   return (
     <Table
+      loading={loading}
       className="w-full"
       dataSource={data}
       pagination={{ ...pagination, showSizeChanger: true }}

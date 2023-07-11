@@ -5,6 +5,7 @@ import { useForm } from "antd/es/form/Form";
 import ReportStatusForm from "./ReportStatusForm";
 import { CommonSendData } from "../../../domain/models/CommonModel";
 import { drawerUpdate } from "../../redux/features/drawerSlice";
+import { globalReset } from "../../redux/features/globalSlice";
 
 function DynamicDrawerForm() {
   const [loading, setLoading] = React.useState(false);
@@ -32,6 +33,7 @@ function DynamicDrawerForm() {
           show: false,
         })
       );
+      dispatch(globalReset());
     }
 
     setLoading(false);
