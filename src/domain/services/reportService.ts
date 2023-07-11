@@ -28,6 +28,19 @@ export async function reportCreate(values: Record<string, any>) {
   return response.data;
 }
 
+export async function reportCreateStatus(values: Record<string, any>) {
+  const { reportId, status, remarks } = values;
+  const data = { status, remarks };
+
+  const response = await restPost(
+    `/report/status/${reportId}`,
+    data,
+    "ReportCreateStatus"
+  );
+
+  return response.data;
+}
+
 export async function reportGetAllStatus(
   params: CommonVariables & { id: number }
 ) {

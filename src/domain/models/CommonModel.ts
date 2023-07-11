@@ -1,3 +1,4 @@
+import { FormInstance } from "antd";
 import { AxiosResponseData, AxiosResponseError } from "./AxiosModel";
 
 export type CommonVariables = {
@@ -42,6 +43,7 @@ export type CommonSendData = (
 ) => Promise<AxiosResponseData | AxiosResponseError>;
 
 export type CommonHandleSubmit<Data = any> = {
+  form: FormInstance;
   loading: boolean;
   handleSubmit: (
     data: Record<string, any>,
