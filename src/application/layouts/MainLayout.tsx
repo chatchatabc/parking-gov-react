@@ -28,7 +28,7 @@ function MainLayout() {
         <Sidebar openSidebar={openSidebar} />
 
         {/* Main */}
-        <main className="w-full flex flex-col bg-slate-100 text-gray-700">
+        <main className="w-full flex flex-col bg-slate-100">
           <Outlet />
         </main>
       </div>

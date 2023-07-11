@@ -63,7 +63,7 @@ function Navbar({ openSidebar, setOpenSidebar }: Props) {
     <header className="flex bg-slate-50 px-8 py-2 items-center border-b border-gray-400">
       <div className="flex space-x-2 self-stretch items-center">
         <button
-          className="p-1 border border-gray-400 self-stretch rounded-md"
+          className="p-1 border border-p400 self-stretch rounded-md"
           onClick={() => {
             setOpenSidebar(!openSidebar);
           }}
@@ -80,8 +80,8 @@ function Navbar({ openSidebar, setOpenSidebar }: Props) {
       >
         <div
           className={`ml-auto rounded-md py-1 px-4 flex items-center space-x-2 cursor-pointer ${
-            popoverVisible ? "bg-gray-200" : ""
-          } duration-300 hover:bg-gray-200`}
+            popoverVisible ? "bg-p100" : ""
+          } duration-300 hover:bg-p100`}
         >
           <p>User</p>
           <div className="w-10 h-10 rounded-full border border-gray-400"></div>

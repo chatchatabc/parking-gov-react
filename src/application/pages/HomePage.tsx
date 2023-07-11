@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <div className="p-4 flex-1">
       <div className="p-4 bg-slate-50 border border-gray-400 shadow-lg rounded-lg">
-        <header className="flex items-center border-b border-gray-400 pb-2">
+        <header className="flex items-center pb-2">
           <h2 className="text-xl font-medium mr-auto">Reports</h2>
           <Button className="bg-blue-500 text-white">Create +</Button>
         </header>
