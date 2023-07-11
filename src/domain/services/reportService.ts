@@ -12,3 +12,32 @@ export async function reportGetAll(params: CommonVariables) {
 
   return response.data;
 }
+
+export function reportOptionsStatus() {
+  return [
+    {
+      value: -1,
+      label: "Cancelled",
+    },
+    {
+      value: 0,
+      label: "Draft",
+    },
+    {
+      value: 1,
+      label: "Pending",
+    },
+    {
+      value: 2,
+      label: "Rejected",
+    },
+    {
+      value: 3,
+      label: "In Progress",
+    },
+    {
+      value: 4,
+      label: "Completed",
+    },
+  ];
+}
