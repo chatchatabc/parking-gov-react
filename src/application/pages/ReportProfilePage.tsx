@@ -1,8 +1,9 @@
 import useGetData from "../hooks/useGetData";
 import { reportGet } from "../../domain/services/reportService";
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
 import { Report } from "../../domain/models/ReportModel";
 import MapBoxComp from "../components/MapBoxComp";
+import ReportStatusTable from "../components/tables/ReportStatusTable";
 
 function ReportProfilePage() {
   const { data, loading } = useGetData<Report>({
@@ -76,6 +77,19 @@ function ReportProfilePage() {
                 height: "200px",
               }}
             />
+          </section>
+        </div>
+      </div>
+
+      <div className="p-2 w-full">
+        <div className="border w-full border-gray-400 bg-slate-50 rounded-lg p-2">
+          <header className="flex items-center">
+            <h2 className="text-xl font-medium mr-auto">Report Status</h2>
+            <Button className="bg-blue-500 text-white">Add +</Button>
+          </header>
+
+          <section className="mt-2">
+            <ReportStatusTable id={data.id} />
           </section>
         </div>
       </div>
