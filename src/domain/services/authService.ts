@@ -26,7 +26,7 @@ export async function authLogin(values: Record<string, any>) {
   }
 
   document.cookie = `token=${token}; path=/; max-age=86400`;
-  sessionStorage.setItem("user", JSON.stringify(response.data));
+  sessionStorage.setItem("user", JSON.stringify(response.data.data));
 
   return response.data;
 }
@@ -40,6 +40,26 @@ export async function authLogout() {
   }
 
   return response.data;
+}
+
+export function authGetUser() {
+  const user = sessionStorage.getItem("user");
+
+  if (!user || user === "undefined") {
+    return null;
+  }
+
+  return JSON.parse(user) as User;
+}
+
+export function authGetId() {
+  const user = authGetUser();
+
+  if (!user) {
+    return null;
+  }
+
+  return user.userUuid;
 }
 
 export function authGetToken() {
