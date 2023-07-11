@@ -7,6 +7,7 @@ import {
 import Navbar from "../components/Navbar";
 import { authGetToken } from "../../domain/services/authService";
 import Sidebar from "../components/Sidebar";
+import DynamicDrawerForm from "../components/forms/DynamicDrawerForm";
 
 function MainLayout() {
   const [openSidebar, setOpenSidebar] = React.useState(utilGetSidebarStatus());
@@ -32,6 +33,8 @@ function MainLayout() {
           <Outlet />
         </main>
       </div>
+
+      <DynamicDrawerForm />
     </>
   );
 }
