@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ReportProfilePage from "./pages/ReportProfilePage";
+import ReportPage from "./pages/ReportPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "reports",
         children: [
+          {
+            path: "",
+            element: <ReportPage />,
+          },
           {
             path: ":id",
             element: <ReportProfilePage />,
