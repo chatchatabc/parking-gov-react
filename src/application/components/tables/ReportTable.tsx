@@ -5,13 +5,27 @@ import {
 } from "../../../domain/services/reportService";
 import { ColumnsType } from "antd/es/table";
 import { Report } from "../../../domain/models/ReportModel";
+import { useNavigate } from "react-router-dom";
 
 function ReportTable() {
+  const navigate = useNavigate();
+
   const columns: ColumnsType<Report> = [
     {
       title: "Report ID",
       key: "id",
-      dataIndex: "id",
+      render: (record: Report) => {
+        return (
+          <button
+            className="underline hover:no-underline"
+            onClick={() => {
+              navigate(`/reports/${record.id}`);
+            }}
+          >
+            {record.id}
+          </button>
+        );
+      },
     },
     {
       title: "Plate Number",
