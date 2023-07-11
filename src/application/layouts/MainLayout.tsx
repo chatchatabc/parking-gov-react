@@ -4,9 +4,9 @@ import {
   utilGetSidebarStatus,
   utilSaveSidebarStatus,
 } from "../../domain/services/utilService";
-import Sidebar from "../components/SideBar";
 import Navbar from "../components/Navbar";
 import { authGetToken } from "../../domain/services/authService";
+import Sidebar from "../components/Sidebar";
 
 function MainLayout() {
   const [openSidebar, setOpenSidebar] = React.useState(utilGetSidebarStatus());
@@ -28,7 +28,7 @@ function MainLayout() {
         <Sidebar openSidebar={openSidebar} />
 
         {/* Main */}
-        <main>
+        <main className="w-full flex flex-col bg-slate-100 text-gray-700">
           <Outlet />
         </main>
       </div>

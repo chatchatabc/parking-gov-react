@@ -57,11 +57,13 @@ function NavbarMenu() {
 }
 
 function Navbar({ openSidebar, setOpenSidebar }: Props) {
+  const [popoverVisible, setPopoverVisible] = React.useState(false);
+
   return (
-    <header className="flex px-8 py-2 items-center border-b-2">
+    <header className="flex bg-slate-50 px-8 py-2 items-center border-b border-gray-400">
       <div className="flex space-x-2 self-stretch items-center">
         <button
-          className="p-1 border-2 self-stretch rounded-md"
+          className="p-1 border border-gray-400 self-stretch rounded-md"
           onClick={() => {
             setOpenSidebar(!openSidebar);
           }}
@@ -70,10 +72,19 @@ function Navbar({ openSidebar, setOpenSidebar }: Props) {
         </button>
         <h2 className="flex-1 text-3xl font-medium">Parking Enforcer</h2>
       </div>
-      <Popover content={<NavbarMenu />} trigger="click" placement="topRight">
-        <div className="ml-auto border rounded-md py-1 px-4 flex items-center space-x-2 cursor-pointer">
+      <Popover
+        onOpenChange={(open) => setPopoverVisible(open)}
+        content={<NavbarMenu />}
+        trigger="click"
+        placement="topRight"
+      >
+        <div
+          className={`ml-auto rounded-md py-1 px-4 flex items-center space-x-2 cursor-pointer ${
+            popoverVisible ? "bg-gray-200" : ""
+          } duration-300 hover:bg-gray-200`}
+        >
           <p>User</p>
-          <div className="w-10 h-10 rounded-full border"></div>
+          <div className="w-10 h-10 rounded-full border border-gray-400"></div>
         </div>
       </Popover>
     </header>

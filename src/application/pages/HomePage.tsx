@@ -1,48 +1,19 @@
-import GridLayout from "react-grid-layout";
-import { withSize } from "react-sizeme";
-import React from "react";
+import { Button } from "antd";
+import ReportTable from "../components/tables/ReportTable";
 
 function HomePage() {
-  const [size, setSize] = React.useState(1200);
-  const withSizeHOC = withSize();
-  const Grid = withSizeHOC(GridLayout);
-
-  const layout = [
-    { i: "a", x: 0, y: 0, w: 12, h: 4 },
-    { i: "b", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-    { i: "c", x: 4, y: 0, w: 1, h: 2 },
-  ];
-
-  React.useEffect(() => {
-    const sidebar = document.querySelector("aside")!;
-
-    // add event listener to window resize
-    window.addEventListener("resize", () => {
-      setSize(window.innerWidth - sidebar.clientWidth);
-    });
-
-    // set initial size
-    setSize(window.innerWidth - sidebar.clientWidth);
-  }, []);
-
   return (
-    <Grid
-      className="layout"
-      layout={layout}
-      cols={12}
-      rowHeight={50}
-      width={size}
-    >
-      <div key="a" className="border">
-        a
+    <div className="p-4 flex-1">
+      <div className="p-4 bg-slate-50 border border-gray-400 shadow-lg rounded-lg">
+        <header className="flex items-center border-b border-gray-400 pb-2">
+          <h2 className="text-xl font-medium mr-auto">Reports</h2>
+          <Button className="bg-blue-500 text-white">Create +</Button>
+        </header>
+        <section className="border-gray-400 rounded-lg">
+          <ReportTable />
+        </section>
       </div>
-      <div key="b" className="border">
-        b
-      </div>
-      <div key="c" className="border">
-        c
-      </div>
-    </Grid>
+    </div>
   );
 }
 

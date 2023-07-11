@@ -32,7 +32,7 @@ function LoginPage() {
 
       {/* Content */}
       <div className="flex flex-1 items-center justify-center bg-white bg-opacity-90">
-        <div className="max-w-2xl w-full shadow-2xl rounded-2xl px-4 py-8 border-2 border-p500 bg-slate-50">
+        <div className="max-w-2xl w-full shadow-2xl rounded-2xl px-4 py-8 border-2 border-gray-400">
           <header className="sr-only">
             <h1 className="text-xl font-bold">Login page</h1>
           </header>
