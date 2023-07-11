@@ -4,11 +4,20 @@ import { Button, Spin } from "antd";
 import { Report } from "../../domain/models/ReportModel";
 import MapBoxComp from "../components/MapBoxComp";
 import ReportStatusTable from "../components/tables/ReportStatusTable";
+import { useAppDispatch } from "../redux/hooks";
+import { drawerUpdate } from "../redux/features/drawerSlice";
+import { useParams } from "react-router-dom";
+import { Marker } from "react-map-gl";
+import { Point } from "mapbox-gl";
 
 function ReportProfilePage() {
+  const dispatch = useAppDispatch();
+
+  const { id } = useParams();
+
   const { data, loading } = useGetData<Report>({
     getData: reportGet,
-    params: { id: 1 },
+    params: { id },
   });
 
   if (loading) {
@@ -70,13 +79,23 @@ function ReportProfilePage() {
           <section className="mt-2">
             <MapBoxComp
               initialViewState={{
-                longitude: data.longitude,
                 latitude: data.latitude,
+                longitude: data.longitude,
+                zoom: 15,
               }}
+              attributionControl={false}
               style={{
                 height: "200px",
+                width: "100%",
               }}
-            />
+            >
+              <Marker
+                latitude={data.latitude}
+                longitude={data.longitude}
+                anchor="bottom"
+                offset={new Point(300, -180)}
+              />
+            </MapBoxComp>
           </section>
         </div>
       </div>
@@ -85,7 +104,24 @@ function ReportProfilePage() {
         <div className="border w-full border-gray-400 bg-slate-50 rounded-lg p-2">
           <header className="flex items-center">
             <h2 className="text-xl font-medium mr-auto">Report Status</h2>
-            <Button className="bg-blue-500 text-white">Add +</Button>
+            <Button
+              onClick={() => {
+                dispatch(
+                  drawerUpdate({
+                    show: true,
+                    title: "Add Report Status",
+                    data: {
+                      reportId: data.id,
+                    },
+                    buttonText: "Add",
+                    content: "reportStatus",
+                  })
+                );
+              }}
+              className="bg-blue-500 text-white"
+            >
+              Add +
+            </Button>
           </header>
 
           <section className="mt-2">

@@ -1,21 +1,19 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { CommonHandleSubmit } from "../../../domain/models/CommonModel";
-import { reportCreate } from "../../../domain/services/reportService";
-import React from "react";
-import MapBoxComp from "../MapBoxComp";
-import { Marker } from "react-map-gl";
-import { Point } from "mapbox-gl";
+import {
+  reportCreateStatus,
+  reportOptionsStatus,
+} from "../../../domain/services/reportService";
 
-function ReportStatusForm({ handleSubmit, loading }: CommonHandleSubmit) {
-  const [lngLat, setLngLat] = React.useState({ longitude: 0, latitude: 0 });
-
+function ReportStatusForm({ handleSubmit, loading, form }: CommonHandleSubmit) {
   return (
     <Form
+      form={form}
       className="-mt-4"
       onFinish={(e) => {
         handleSubmit(
-          { ...e, ...lngLat },
-          reportCreate,
+          e,
+          reportCreateStatus,
           "Successfully created report status",
           "Failed to create report status"
         );
@@ -23,44 +21,27 @@ function ReportStatusForm({ handleSubmit, loading }: CommonHandleSubmit) {
       layout="vertical"
     >
       <div className="flex flex-wrap">
-        <Form.Item
-          className="w-1/2 p-1"
-          name="name"
-          label="Name"
-          rules={[
-            {
-              required: true,
-              message: "Need some input!",
-            },
-          ]}
-        >
-          <Input placeholder="Name" />
-        </Form.Item>
+        <Form.Item name="reportId" hidden></Form.Item>
 
         <Form.Item
-          className="w-1/2 p-1"
-          name="plateNumber"
-          label="Plate Number"
+          className="w-full p-1"
+          name="status"
+          label="Status"
+          initialValue={0}
           rules={[
             {
               required: true,
               message: "Need some input!",
             },
-            {
-              pattern: new RegExp(
-                /^[A-Z]{2}-\d{5}$|^[A-Z]{3}-\d{4}$|^\d{4}-\d{7}$|^[A-Z]{2}-\d{5}$/
-              ),
-              message: "Invalid plate number",
-            },
           ]}
         >
-          <Input placeholder="Plate Number" />
+          <Select placeholder="Status" options={reportOptionsStatus()} />
         </Form.Item>
 
         <Form.Item
           className="w-full p-1"
-          name="description"
-          label="Description"
+          name="remarks"
+          label="Remarks"
           rules={[
             {
               required: true,
@@ -68,34 +49,8 @@ function ReportStatusForm({ handleSubmit, loading }: CommonHandleSubmit) {
             },
           ]}
         >
-          <Input.TextArea placeholder="Description" />
+          <Input.TextArea placeholder="Remarks" />
         </Form.Item>
-
-        <section className="w-full">
-          <header className="flex items-end gap-1">
-            <h3>
-              <span className="text-red-500">*</span> Longitude & Latitude{" "}
-              <span>
-                ({lngLat.longitude}, {lngLat.latitude})
-              </span>
-            </h3>
-          </header>
-          <section>
-            <MapBoxComp
-              attributionControl={false}
-              style={{ width: "100%", height: "300px" }}
-              onClick={(e) => {
-                const { lngLat } = e;
-                setLngLat({
-                  longitude: lngLat.lng,
-                  latitude: lngLat.lat,
-                });
-              }}
-            >
-              <Marker {...lngLat} offset={new Point(215, -310)} />
-            </MapBoxComp>
-          </section>
-        </section>
 
         <Button
           loading={loading}

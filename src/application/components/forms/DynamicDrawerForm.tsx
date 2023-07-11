@@ -2,10 +2,11 @@ import { Button, Drawer, message } from "antd";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useForm } from "antd/es/form/Form";
-import ReportStatusForm from "./ReportStatusForm";
 import { CommonSendData } from "../../../domain/models/CommonModel";
 import { drawerUpdate } from "../../redux/features/drawerSlice";
 import { globalReset } from "../../redux/features/globalSlice";
+import ReportForm from "./ReportForm";
+import ReportStatusForm from "./ReportStatusForm";
 
 function DynamicDrawerForm() {
   const [loading, setLoading] = React.useState(false);
@@ -41,6 +42,10 @@ function DynamicDrawerForm() {
     return response;
   }
 
+  React.useEffect(() => {
+    form.setFieldsValue(drawer.data);
+  }, [drawer.data]);
+
   return (
     <Drawer
       onClose={() => {
@@ -69,8 +74,16 @@ function DynamicDrawerForm() {
       placement="right"
       open={drawer.show}
     >
+      {drawer.content === "report" && (
+        <ReportForm
+          form={form}
+          loading={loading}
+          handleSubmit={handleSubmit}
+        ></ReportForm>
+      )}
       {drawer.content === "reportStatus" && (
         <ReportStatusForm
+          form={form}
           loading={loading}
           handleSubmit={handleSubmit}
         ></ReportStatusForm>

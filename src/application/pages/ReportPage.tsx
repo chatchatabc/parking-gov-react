@@ -16,7 +16,7 @@ function ReportPage() {
               dispatch(
                 drawerUpdate({
                   show: true,
-                  title: "Add Report Status",
+                  title: "Add Report",
                   data: {},
                   buttonText: "Add",
                   content: "reportStatus",
