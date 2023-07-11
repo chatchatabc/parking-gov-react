@@ -87,8 +87,8 @@ function ReportStatusForm({ handleSubmit, loading }: CommonHandleSubmit) {
               onClick={(e) => {
                 const { lngLat } = e;
                 setLngLat({
-                  longitude: Number(lngLat.lng.toFixed(6)),
-                  latitude: Number(lngLat.lat.toFixed(6)),
+                  longitude: lngLat.lng,
+                  latitude: lngLat.lat,
                 });
               }}
             >
