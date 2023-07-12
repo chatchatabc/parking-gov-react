@@ -1,6 +1,6 @@
 import React from "react";
 import SortIcon from "../../assets/SortIcon";
-import SortDuoIcon from "../../assets/SortDuoIcon";
+import SortDuoIcon from "../../assets/SortActiveIcon";
 import { Modal } from "antd";
 import MagnifyIcon from "../../assets/MagnifyIcon";
 
