@@ -1,8 +1,10 @@
 import React from "react";
 import SortIcon from "../../assets/SortIcon";
 import SortDuoIcon from "../../assets/SortActiveIcon";
-import { Input, InputRef, Modal, Tooltip } from "antd";
+import { Dropdown, Input, InputRef, Modal, Tooltip } from "antd";
 import MagnifyIcon from "../../assets/MagnifyIcon";
+import FilterIcon from "../../assets/FilterIcon";
+import FilterActiveIcon from "../../assets/FilterActiveIcon";
 
 type Props = {
   setFilters: React.Dispatch<React.SetStateAction<Record<string, any>>>;
@@ -10,7 +12,7 @@ type Props = {
   title: string;
   searchName?: string;
   sortName?: string;
-  filterOptions?: { label: string; value: string }[];
+  filterOptions?: { label: string; key: string }[];
 };
 
 function CustomHeaderTable({
@@ -23,6 +25,7 @@ function CustomHeaderTable({
 }: Props) {
   const inputRef = React.useRef<InputRef>(null);
   const [sortName1, sortValue] = filters.sort?.split(",");
+  const filter1 = filters[sortName ?? ""];
 
   return (
     <div className="flex gap-2">
@@ -56,7 +59,7 @@ function CustomHeaderTable({
       )}
 
       {/* Search */}
-      {searchName && (
+      {searchName && !filterOptions && (
         <Tooltip title={filters[searchName]}>
           <button
             onClick={() => {
@@ -96,6 +99,36 @@ function CustomHeaderTable({
               <MagnifyIcon />
             </div>
           </button>
+        </Tooltip>
+      )}
+
+      {/* Filter */}
+      {filterOptions && searchName && (
+        <Tooltip
+          title={
+            filterOptions.find((option) => option.key === filter1)?.label ?? ""
+          }
+        >
+          <Dropdown
+            trigger={["click"]}
+            menu={{
+              items: filterOptions,
+              onClick: (value) => {
+                setFilters((prev) => {
+                  return {
+                    ...prev,
+                    [searchName]: value.key,
+                  };
+                });
+              },
+            }}
+          >
+            <button>
+              <div className="w-5 h-5">
+                {filter1 ? <FilterActiveIcon /> : <FilterIcon />}
+              </div>
+            </button>
+          </Dropdown>
         </Tooltip>
       )}
     </div>

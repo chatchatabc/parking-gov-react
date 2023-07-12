@@ -15,7 +15,13 @@ function ReportTable() {
   const [filters, setFilters] = React.useState<Record<string, any>>({
     sort: "id,asc",
   });
-  console.log(filters);
+
+  const statusOptions = reportOptionsStatus().map((option) => {
+    return {
+      key: String(option.value),
+      label: option.label,
+    };
+  });
 
   const navigate = useNavigate();
 
@@ -75,6 +81,7 @@ function ReportTable() {
           setFilters={setFilters}
           sortName="status"
           searchName="status"
+          filterOptions={statusOptions}
         />
       ),
       key: "status",
