@@ -44,8 +44,9 @@ function NavbarMenu() {
                   message.error("Logout failed");
                 } else {
                   message.success("Logout success");
-                  navigate("/login");
                 }
+
+                navigate("/login");
               },
             });
           }}
