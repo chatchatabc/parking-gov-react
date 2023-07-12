@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { CommonHandleSubmit } from "../../../domain/models/CommonModel";
 import { reportCreate } from "../../../domain/services/reportService";
 import React from "react";
@@ -7,13 +7,17 @@ import { Marker } from "react-map-gl";
 import { Point } from "mapbox-gl";
 
 function ReportForm({ handleSubmit, loading, form }: CommonHandleSubmit) {
-  const [lngLat, setLngLat] = React.useState({ longitude: 0, latitude: 0 });
+  const [lngLat, setLngLat] = React.useState<any>(null);
 
   return (
     <Form
       form={form}
       className="-mt-4"
       onFinish={(e) => {
+        if (!lngLat) {
+          return message.error("Please select a location");
+        }
+
         handleSubmit(
           { ...e, ...lngLat },
           reportCreate,
@@ -77,7 +81,7 @@ function ReportForm({ handleSubmit, loading, form }: CommonHandleSubmit) {
             <h3>
               <span className="text-red-500">*</span> Longitude & Latitude{" "}
               <span>
-                ({lngLat.longitude}, {lngLat.latitude})
+                ({lngLat?.longitude ?? 0}, {lngLat?.latitude ?? 0})
               </span>
             </h3>
           </header>
@@ -93,7 +97,11 @@ function ReportForm({ handleSubmit, loading, form }: CommonHandleSubmit) {
                 });
               }}
             >
-              <Marker {...lngLat} offset={new Point(215, -310)} />
+              <Marker
+                longitude={lngLat?.longitude ?? 0}
+                latitude={lngLat?.latitude ?? 0}
+                offset={new Point(215, -310)}
+              />
             </MapBoxComp>
           </section>
         </section>

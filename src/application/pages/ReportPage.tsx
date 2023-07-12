@@ -19,7 +19,7 @@ function ReportPage() {
                   title: "Add Report",
                   data: {},
                   buttonText: "Add",
-                  content: "reportStatus",
+                  content: "report",
                 })
               );
             }}
