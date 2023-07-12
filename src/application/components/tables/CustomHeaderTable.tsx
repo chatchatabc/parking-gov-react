@@ -112,6 +112,7 @@ function CustomHeaderTable({
           <Dropdown
             trigger={["click"]}
             menu={{
+              activeKey: filter1,
               items: filterOptions,
               onClick: (value) => {
                 setFilters((prev) => {
