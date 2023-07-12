@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ReportProfilePage from "./pages/ReportProfilePage";
 import ReportPage from "./pages/ReportPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             element: <ReportProfilePage />,
           },
         ],
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
       },
       {
         path: "*",
