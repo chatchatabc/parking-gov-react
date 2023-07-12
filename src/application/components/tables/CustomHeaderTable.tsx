@@ -134,7 +134,7 @@ function CustomHeaderTable({
             }}
           >
             <button>
-              <div className="w-5 h-5">
+              <div className={`w-5 h-5 ${filter1 ? "text-p500" : ""}`}>
                 {filter1 ? <FilterActiveIcon /> : <FilterIcon />}
               </div>
             </button>
