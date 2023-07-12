@@ -27,6 +27,7 @@ function ReportTable() {
           filters={filters}
           setFilters={setFilters}
           sortName="id"
+          searchName="id"
         />
       ),
       key: "id",
@@ -73,6 +74,7 @@ function ReportTable() {
           filters={filters}
           setFilters={setFilters}
           sortName="status"
+          searchName="status"
         />
       ),
       key: "status",

@@ -28,6 +28,13 @@ function DynamicTable({ getData, ...props }: Props) {
   });
 
   React.useEffect(() => {
+    setPagination({
+      ...pagination,
+      current: 1,
+    });
+  }, [getData]);
+
+  React.useEffect(() => {
     setLoading(true);
   }, [global.reset, getData]);
 
