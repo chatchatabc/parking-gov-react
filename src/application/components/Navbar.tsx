@@ -7,6 +7,8 @@ import {
 } from "../../domain/services/authService";
 import { useNavigate } from "react-router-dom";
 import ImageComp from "./ImageComp";
+import MenuCloseIcon from "../assets/MenuCloseIcon";
+import MenuIcon from "../assets/MenuIcon";
 
 type Props = {
   openSidebar: boolean;
@@ -74,12 +76,14 @@ function Navbar({ openSidebar, setOpenSidebar }: Props) {
     <header className="flex bg-slate-50 px-8 py-2 items-center border-b border-gray-400">
       <div className="flex space-x-2 self-stretch items-center">
         <button
-          className="p-1 border border-p400 self-stretch rounded-md"
+          className="p-1 border border-p400 text-p500 rounded-md transition hover:text-white hover:bg-p500"
           onClick={() => {
             setOpenSidebar(!openSidebar);
           }}
         >
-          Menu
+          <div className="w-8 h-8 ">
+            {openSidebar ? <MenuCloseIcon /> : <MenuIcon />}
+          </div>
         </button>
         <h2 className="flex-1 text-3xl font-medium">Parking Enforcer</h2>
       </div>
