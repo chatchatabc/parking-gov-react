@@ -19,7 +19,12 @@ function NavbarMenu() {
   return (
     <ul className="w-48 space-y-4 py-1">
       <li>
-        <button className="w-full block text-start group">
+        <button
+          onClick={() => {
+            navigate("/profile");
+          }}
+          className="w-full block text-start group"
+        >
           <div className="w-fit">
             <p>Profile</p>
             <div className="h-0.5 w-full scale-x-0 origin-left bg-black duration-300 group-hover:scale-x-100"></div>
@@ -91,7 +96,10 @@ function Navbar({ openSidebar, setOpenSidebar }: Props) {
         >
           <p className="capitalize">{authGetUsername()}</p>
           <div className="w-10 h-10 rounded-full border border-gray-400 overflow-hidden">
-            <ImageComp src={`/api/user/avatar/${authGetId()}`} />
+            <ImageComp
+              className="w-full h-full object-cover"
+              src={`/api/user/avatar/${authGetId()}`}
+            />
           </div>
         </div>
       </Popover>
