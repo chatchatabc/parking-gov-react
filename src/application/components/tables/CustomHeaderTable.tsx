@@ -115,6 +115,15 @@ function CustomHeaderTable({
               activeKey: filter1,
               items: filterOptions,
               onClick: (value) => {
+                if (value.key === filter1) {
+                  setFilters((prev) => {
+                    return {
+                      ...prev,
+                      [searchName]: null,
+                    };
+                  });
+                  return;
+                }
                 setFilters((prev) => {
                   return {
                     ...prev,
