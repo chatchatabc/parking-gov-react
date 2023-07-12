@@ -8,13 +8,27 @@ import { Report } from "../../../domain/models/ReportModel";
 import { useNavigate } from "react-router-dom";
 import { Popover } from "antd";
 import InfoIcon from "../../assets/InfoIcon";
+import CustomHeaderTable from "./CustomHeaderTable";
+import React from "react";
 
 function ReportTable() {
+  const [filters, setFilters] = React.useState<Record<string, any>>({
+    sort: "id,asc",
+  });
+  console.log(filters);
+
   const navigate = useNavigate();
 
   const columns: ColumnsType<Report> = [
     {
-      title: "Report ID",
+      title: (
+        <CustomHeaderTable
+          title="Report ID"
+          filters={filters}
+          setFilters={setFilters}
+          sortName="id"
+        />
+      ),
       key: "id",
       render: (record: Report) => {
         return (
@@ -30,7 +44,14 @@ function ReportTable() {
       },
     },
     {
-      title: "Plate Number",
+      title: (
+        <CustomHeaderTable
+          title="Plate Number"
+          filters={filters}
+          setFilters={setFilters}
+          sortName="plateNumber"
+        />
+      ),
       key: "plateNumber",
       dataIndex: "plateNumber",
     },
@@ -46,7 +67,14 @@ function ReportTable() {
       },
     },
     {
-      title: "Status",
+      title: (
+        <CustomHeaderTable
+          title="Status"
+          filters={filters}
+          setFilters={setFilters}
+          sortName="status"
+        />
+      ),
       key: "status",
       render: (record: Report) => {
         const statusOptions = reportOptionsStatus();
@@ -84,7 +112,17 @@ function ReportTable() {
     },
   ];
 
-  return <DynamicTable columns={columns} getData={reportGetAll} />;
+  return (
+    <DynamicTable
+      columns={columns}
+      getData={(variables) => {
+        return reportGetAll({
+          ...variables,
+          ...filters,
+        });
+      }}
+    />
+  );
 }
 
 export default ReportTable;

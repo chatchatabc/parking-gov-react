@@ -29,7 +29,7 @@ function DynamicTable({ getData, ...props }: Props) {
 
   React.useEffect(() => {
     setLoading(true);
-  }, [global.reset]);
+  }, [global.reset, getData]);
 
   React.useEffect(() => {
     if (loading) {
