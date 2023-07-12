@@ -3,7 +3,6 @@ import SortIcon from "../../assets/SortIcon";
 import SortDuoIcon from "../../assets/SortActiveIcon";
 import { Input, InputRef, Modal, Tooltip } from "antd";
 import MagnifyIcon from "../../assets/MagnifyIcon";
-import MagnifyActiveIcon from "../../assets/MagnifyActiveIcon";
 
 type Props = {
   setFilters: React.Dispatch<React.SetStateAction<Record<string, any>>>;
